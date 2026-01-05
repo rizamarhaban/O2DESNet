@@ -275,9 +275,9 @@ public class Polynomial : IFormattable, IEquatable<Polynomial>, ICloneable
         {
             case -1: // Zero-polynomial
             case 0: // Non-zero constant: y = a0
-                return new Complex[0];
+                return [];
             case 1: // Linear: y = a0 + a1*x
-                return new[] { new Complex(-Coefficients[0] / Coefficients[1], 0) };
+                return [new Complex(-Coefficients[0] / Coefficients[1], 0)];
         }
 
         DenseMatrix A = EigenvalueMatrix();

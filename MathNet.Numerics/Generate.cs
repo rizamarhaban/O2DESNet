@@ -48,7 +48,7 @@ public static class Generate
     /// </summary>
     public static T[] Map<TA, T>(TA[] points, Func<TA, T> map)
     {
-        var res = new T[points.Length];
+        T[] res = new T[points.Length];
         for (int i = 0; i < points.Length; i++)
         {
             res[i] = map(points[i]);
@@ -75,7 +75,7 @@ public static class Generate
             throw new ArgumentException(Resources.ArgumentArraysSameLength, nameof(pointsB));
         }
 
-        var res = new T[pointsA.Length];
+        T[] res = new T[pointsA.Length];
         for (int i = 0; i < res.Length; i++)
         {
             res[i] = map(pointsA[i], pointsB[i]);
@@ -104,13 +104,13 @@ public static class Generate
         }
 
         if (length == 0)
-            return new double[0];
+            return [];
         if (length == 1)
-            return new[] { stop };
+            return [stop];
 
         double step = (stop - start) / (length - 1);
 
-        var data = new double[length];
+        double[] data = new double[length];
         for (int i = 0; i < data.Length; i++)
         {
             data[i] = start + i * step;
@@ -131,13 +131,13 @@ public static class Generate
         }
 
         if (length == 0)
-            return new T[0];
+            return [];
         if (length == 1)
-            return new[] { map(stop) };
+            return [map(stop)];
 
         double step = (stop - start) / (length - 1);
 
-        var data = new T[length];
+        T[] data = new T[length];
         for (int i = 0; i < data.Length; i++)
         {
             data[i] = map(start + i * step);
@@ -159,13 +159,13 @@ public static class Generate
         }
 
         if (length == 0)
-            return new double[0];
+            return [];
         if (length == 1)
-            return new[] { Math.Pow(10, stopExponent) };
+            return [Math.Pow(10, stopExponent)];
 
         double step = (stopExponent - startExponent) / (length - 1);
 
-        var data = new double[length];
+        double[] data = new double[length];
         for (int i = 0; i < data.Length; i++)
         {
             data[i] = Math.Pow(10, startExponent + i * step);
@@ -186,13 +186,13 @@ public static class Generate
         }
 
         if (length == 0)
-            return new T[0];
+            return [];
         if (length == 1)
-            return new[] { map(Math.Pow(10, stopExponent)) };
+            return [map(Math.Pow(10, stopExponent))];
 
         double step = (stopExponent - startExponent) / (length - 1);
 
-        var data = new T[length];
+        T[] data = new T[length];
         for (int i = 0; i < data.Length; i++)
         {
             data[i] = map(Math.Pow(10, startExponent + i * step));
@@ -209,10 +209,10 @@ public static class Generate
     public static double[] LinearRange(int start, int stop)
     {
         if (start == stop)
-            return new double[] { start };
+            return [start];
         if (start < stop)
         {
-            var data = new double[stop - start + 1];
+            double[] data = new double[stop - start + 1];
             for (int i = 0; i < data.Length; i++)
             {
                 data[i] = start + i;
@@ -222,7 +222,7 @@ public static class Generate
         }
         else
         {
-            var data = new double[start - stop + 1];
+            double[] data = new double[start - stop + 1];
             for (int i = 0; i < data.Length; i++)
             {
                 data[i] = start - i;
@@ -239,10 +239,10 @@ public static class Generate
     public static int[] LinearRangeInt32(int start, int stop)
     {
         if (start == stop)
-            return new int[] { start };
+            return [start];
         if (start < stop)
         {
-            var data = new int[stop - start + 1];
+            int[] data = new int[stop - start + 1];
             for (int i = 0; i < data.Length; i++)
             {
                 data[i] = start + i;
@@ -252,7 +252,7 @@ public static class Generate
         }
         else
         {
-            var data = new int[start - stop + 1];
+            int[] data = new int[start - stop + 1];
             for (int i = 0; i < data.Length; i++)
             {
                 data[i] = start - i;
@@ -270,13 +270,13 @@ public static class Generate
     public static double[] LinearRange(int start, int step, int stop)
     {
         if (start == stop)
-            return new double[] { start };
+            return [start];
         if (start < stop && step < 0 || start > stop && step > 0 || step == 0d)
         {
-            return new double[0];
+            return [];
         }
 
-        var data = new double[(stop - start) / step + 1];
+        double[] data = new double[(stop - start) / step + 1];
         for (int i = 0; i < data.Length; i++)
         {
             data[i] = start + i * step;
@@ -293,13 +293,13 @@ public static class Generate
     public static int[] LinearRangeInt32(int start, int step, int stop)
     {
         if (start == stop)
-            return new int[] { start };
+            return [start];
         if (start < stop && step < 0 || start > stop && step > 0 || step == 0d)
         {
-            return new int[0];
+            return [];
         }
 
-        var data = new int[(stop - start) / step + 1];
+        int[] data = new int[(stop - start) / step + 1];
         for (int i = 0; i < data.Length; i++)
         {
             data[i] = start + i * step;
@@ -316,13 +316,13 @@ public static class Generate
     public static double[] LinearRange(double start, double step, double stop)
     {
         if (start == stop)
-            return new[] { start };
+            return [start];
         if (start < stop && step < 0 || start > stop && step > 0 || step == 0d)
         {
-            return new double[0];
+            return [];
         }
 
-        var data = new double[(int)Math.Floor((stop - start) / step + 1d)];
+        double[] data = new double[(int)Math.Floor((stop - start) / step + 1d)];
         for (int i = 0; i < data.Length; i++)
         {
             data[i] = start + i * step;
@@ -338,13 +338,13 @@ public static class Generate
     public static T[] LinearRangeMap<T>(double start, double step, double stop, Func<double, T> map)
     {
         if (start == stop)
-            return new[] { map(start) };
+            return [map(start)];
         if (start < stop && step < 0 || start > stop && step > 0 || step == 0d)
         {
-            return new T[0];
+            return [];
         }
 
-        var data = new T[(int)Math.Floor((stop - start) / step + 1d)];
+        T[] data = new T[(int)Math.Floor((stop - start) / step + 1d)];
         for (int i = 0; i < data.Length; i++)
         {
             data[i] = map(start + i * step);
@@ -843,7 +843,7 @@ public static class Generate
             throw new ArgumentOutOfRangeException(nameof(length));
         }
 
-        var data = new BigInteger[length];
+        BigInteger[] data = new BigInteger[length];
         if (data.Length > 0)
         {
             data[0] = BigInteger.Zero;
