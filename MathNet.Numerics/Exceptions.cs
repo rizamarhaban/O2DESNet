@@ -21,12 +21,11 @@ public class NonConvergenceException : Exception
     public NonConvergenceException(string message, Exception innerException) : base(message, innerException)
     {
     }
-#if !NETSTANDARD1_3
+
     protected NonConvergenceException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         : base(info, context)
     {
     }
-#endif
 }
 
 /// <summary>
@@ -49,12 +48,11 @@ public class NumericalBreakdownException : NonConvergenceException
         : base(message, innerException)
     {
     }
-#if !NETSTANDARD1_3
+
     protected NumericalBreakdownException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         : base(info, context)
     {
     }
-#endif
 }
 
 /// <summary>
@@ -76,12 +74,11 @@ public abstract class NativeInterfaceException : Exception
         : base(message, innerException)
     {
     }
-#if !NETSTANDARD1_3
+
     protected NativeInterfaceException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         : base(info, context)
     {
     }
-#endif
 }
 
 /// <summary>
@@ -104,12 +101,11 @@ public class InvalidParameterException : NativeInterfaceException
         : base(string.Format(Resources.InvalidParameterWithNumber, parameter), innerException)
     {
     }
-#if !NETSTANDARD1_3
+
     protected InvalidParameterException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         : base(info, context)
     {
     }
-#endif
 }
 
 /// <summary>
@@ -127,12 +123,11 @@ public class MemoryAllocationException : NativeInterfaceException
         : base(Resources.MemoryAllocation, innerException)
     {
     }
-#if !NETSTANDARD1_3
+
     protected MemoryAllocationException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         : base(info, context)
     {
     }
-#endif
 }
 
 /// <summary>
@@ -155,10 +150,9 @@ public class SingularUMatrixException : NativeInterfaceException
         : base(string.Format(Resources.SingularUMatrixWithElement, element), innerException)
     {
     }
-#if !NETSTANDARD1_3
+
     protected SingularUMatrixException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         : base(info, context)
     {
     }
-#endif
 }
