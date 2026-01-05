@@ -12,9 +12,6 @@ using System.Text;
 
 using Complex = System.Numerics.Complex;
 
-#if !NETSTANDARD1_3
-#endif
-
 namespace MathNet.Numerics;
 
 /// <summary>
@@ -22,10 +19,7 @@ namespace MathNet.Numerics;
 /// </summary>
 [Serializable]
 [DataContract(Namespace = "urn:MathNet/Numerics")]
-public class Polynomial : IFormattable, IEquatable<Polynomial>
-#if !NETSTANDARD1_3
-    , ICloneable
-#endif
+public class Polynomial : IFormattable, IEquatable<Polynomial>, ICloneable
 {
     /// <summary>
     /// The coefficients of the polynomial in a
@@ -65,11 +59,7 @@ public class Polynomial : IFormattable, IEquatable<Polynomial>
     /// </summary>
     public Polynomial()
     {
-#if NET40
-        Coefficients = new double[0];
-#else
         Coefficients = Array.Empty<double>();
-#endif
     }
 
     /// <summary>
@@ -81,11 +71,7 @@ public class Polynomial : IFormattable, IEquatable<Polynomial>
     {
         if (coefficient == 0.0)
         {
-#if NET40
-            Coefficients = new double[0];
-#else
             Coefficients = Array.Empty<double>();
-#endif
         }
         else
         {
@@ -1055,7 +1041,6 @@ public class Polynomial : IFormattable, IEquatable<Polynomial>
         return new Polynomial(coefficients);
     }
 
-#if !NETSTANDARD1_3
     /// <summary>
     /// Creates a new object that is a copy of the current instance.
     /// </summary>
@@ -1066,7 +1051,6 @@ public class Polynomial : IFormattable, IEquatable<Polynomial>
     {
         return Clone();
     }
-#endif
 
     #endregion
 }

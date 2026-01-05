@@ -296,30 +296,11 @@ public static class Control
 
     public static string Describe()
     {
-#if NET40
-        var versionAttribute = typeof(Control).Assembly
-            .GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false)
-            .OfType<AssemblyInformationalVersionAttribute>()
-            .FirstOrDefault();
-#else
         var versionAttribute = typeof(Control).GetTypeInfo().Assembly.GetCustomAttribute(typeof(AssemblyInformationalVersionAttribute)) as AssemblyInformationalVersionAttribute;
-#endif
 
         var sb = new StringBuilder();
         sb.AppendLine("Math.NET Numerics Configuration:");
         sb.AppendLine($"Version {versionAttribute?.InformationalVersion}");
-#if NETSTANDARD1_3
-        sb.AppendLine("Built for .Net Standard 1.3");
-#elif NETSTANDARD2_0
-        sb.AppendLine("Built for .Net Standard 2.0");
-#elif NET40
-        sb.AppendLine("Built for .Net Framework 4.0");
-#elif NET461
-        sb.AppendLine("Built for .Net Framework 4.6.1");
-#endif
-#if !NATIVE
-        sb.AppendLine("No Native Provider Support");
-#endif
         sb.AppendLine($"Linear Algebra Provider: {LinearAlgebraControl.Provider}");
         sb.AppendLine($"Fourier Transform Provider: {FourierTransformControl.Provider}");
         sb.AppendLine($"Max Degree of Parallelism: {MaxDegreeOfParallelism}");
@@ -327,16 +308,8 @@ public static class Control
         sb.AppendLine($"Parallelize Order: {ParallelizeOrder}");
         sb.AppendLine($"Check Distribution Parameters: {CheckDistributionParameters}");
         sb.AppendLine($"Thread-Safe RNGs: {ThreadSafeRandomNumberGenerators}");
-#if NETSTANDARD1_3 || NETSTANDARD2_0
-        // This would also work in .Net 4.0, but we don't want the dependency just for that.
-        sb.AppendLine($"Operating System: {RuntimeInformation.OSDescription}");
-        sb.AppendLine($"Operating System Architecture: {RuntimeInformation.OSArchitecture}");
-        sb.AppendLine($"Framework: {RuntimeInformation.FrameworkDescription}");
-        sb.AppendLine($"Process Architecture: {RuntimeInformation.ProcessArchitecture}");
-#else
         sb.AppendLine($"Operating System: {Environment.OSVersion}");
         sb.AppendLine($"Framework: {Environment.Version}");
-#endif
         return sb.ToString();
     }
 }

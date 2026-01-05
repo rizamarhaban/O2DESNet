@@ -27,14 +27,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 // </copyright>
 
-using System;
-
 using MathNet.Numerics.Distributions;
 using MathNet.Numerics.Statistics;
 
-#if !NETSTANDARD1_3
+using System;
 using System.Runtime;
-#endif
 
 // ReSharper disable InconsistentNaming
 

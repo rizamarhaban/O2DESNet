@@ -28,12 +28,9 @@
 // </copyright>
 
 using System;
-using System.Collections.Generic;
-
-#if !NETSTANDARD1_3
-using System.Threading.Tasks;
 using System.Collections.Concurrent;
-#endif
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MathNet.Numerics.Threading;
 
